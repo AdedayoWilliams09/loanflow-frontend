@@ -27,7 +27,7 @@ Before you begin, make sure you have:
 
 ```bash
 # Clone the repository (if using Git)
-git clone <your-frontend-repo-url>
+git clone https://github.com/AdedayoWilliams09/loanflow-frontend
 cd frontend
 
 # Install dependencies
@@ -193,4 +193,4 @@ Solutions:
 4. Verify the file extension (.js, .jsx)
 
 ### Links
-Backend README - Documentation for the backend
+[Backend README] (https://github.com/AdedayoWilliams09/loanflow-backend) - Documentation for the backend
