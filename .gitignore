@@ -1,0 +1,30 @@
+# Dependency directories
+node_modules/
+
+# Production build outputs (Vite/React generates this folder)
+dist/
+build/
+
+# Frontend local environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# Test coverage reports
+coverage/
+*.lcov
+
+# Editor/IDE configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Operating system files
+.DS_Store
+Thumbs.db
