@@ -18,7 +18,7 @@ import axios from 'axios';
 
 // Determine the base URL
 // In development, use localhost. In production, use the deployed URL.
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Create the Axios instance
 const axiosInstance = axios.create({

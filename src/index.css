@@ -1,14 +1,55 @@
 /* FILE: frontend/src/index.css */
+/* MODIFIED: Add dark mode styles */
 
-@import 'tailwindcss';
+@import "tailwindcss";
 
-/* Custom styles can go below */
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-accent: #7c3aed;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-#root {
-  min-height: 100vh;
+.dark {
+  --color-primary: #ffffff;
+  --color-secondary: #000000;
+}
+
+body {
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #6b7280;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
 }

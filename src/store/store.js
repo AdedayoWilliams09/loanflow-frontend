@@ -3,6 +3,7 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import apiReducer from './apiSlice';
+import homeReducer from './homeSlice';
 
 /**
  * Redux Store Configuration
@@ -18,6 +19,7 @@ import apiReducer from './apiSlice';
 export const store = configureStore({
   reducer: {
     api: apiReducer,
+    home: homeReducer,
     // Add more reducers here as the app grows
   },
   // Development tools

@@ -3,26 +3,22 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store.js';
-import App from './App.jsx';
+import { router } from './router.jsx';
+import { ThemeProvider } from './contexts/ThemeContext.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 
-/**
- * Application Entry Point
- * 
- *  Child Explanation:
- * "This is where our app starts. We wrap everything in the Redux Provider
- * so all parts of the app can talk to the control room."
- * 
- *  Technical Explanation:
- * "We render the app to the DOM, wrapping it in the Redux Provider.
- * This makes the Redux store available to all components in the app."
- */
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <HelmetProvider>
     <Provider store={store}>
-      <App />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 );
