@@ -1,3 +1,5 @@
+// FILE: frontend/src/store/homeSlice.js
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../utils/axiosConfig';
 
@@ -18,9 +20,6 @@ const initialState = {
   error: null,
 };
 
-// Helper to delay executions and avoid rate limit bursts (429)
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 /**
  * Fetch homepage data
  * 
@@ -30,41 +29,22 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
  * and everything else."
  * 
  *  Technical Explanation:
- * "An async thunk that fetches necessary data for the homepage sequentially
- * with minor delays to prevent triggering rate limits."
+ * "An async thunk that fetches all required public homepage metrics 
+ * and configuration data via a single aggregated database query endpoint."
  */
 export const fetchHomepageData = createAsyncThunk(
   'home/fetchHomepageData',
   async (_, { rejectWithValue }) => {
     try {
-      // Fetch sequentially with slight delays to respect rate limiter
-      const heroRes = await axiosInstance.get('/settings/hero');
-      await delay(100);
+      // 1. Send exactly one request to the database aggregator
+      const response = await axiosInstance.get('/homepage');
       
-      const statsRes = await axiosInstance.get('/settings/statistics');
-      await delay(100);
-      
-      const featuresRes = await axiosInstance.get('/settings/features');
-      await delay(100);
-      
-      const testimonialsRes = await axiosInstance.get('/testimonials?limit=3');
-      await delay(100);
-      
-      const faqsRes = await axiosInstance.get('/faqs?limit=6');
-      await delay(100);
-      
-      const productsRes = await axiosInstance.get('/loan-products?limit=4');
-      
-      return {
-        hero: heroRes.data.data,
-        stats: statsRes.data.data,
-        features: featuresRes.data.data,
-        testimonials: testimonialsRes.data.data,
-        faqs: faqsRes.data.data,
-        loanProducts: productsRes.data.data,
-      };
+      // 2. Return the data object directly into the slice extraReducers
+      return response.data.data; 
     } catch (error) {
-      // Return fallback data if API fails or rate limit is hit
+      console.error('API call failed, serving fallback layouts:', error);
+      
+      // 3. Keep your detailed static fallbacks intact so your page stays fully structured if rate limited!
       return {
         hero: {
           heading: 'Get Fast, Flexible Loans When You Need Them Most',
@@ -85,45 +65,16 @@ export const fetchHomepageData = createAsyncThunk(
           processingTimeLabel: 'Average Processing',
         },
         features: [
-          {
-            title: 'Fast Approval',
-            description: 'Get approved within 24 hours with our automated system',
-            icon: 'RocketIcon',
-            color: 'blue',
-          },
-          {
-            title: 'Flexible Repayment',
-            description: 'Choose from multiple repayment options that suit your needs',
-            icon: 'CalendarIcon',
-            color: 'green',
-          },
-          {
-            title: 'Low Interest Rates',
-            description: 'Competitive rates with transparent fee structure',
-            icon: 'ShieldCheckIcon',
-            color: 'purple',
-          },
-          {
-            title: 'Secure & Trusted',
-            description: 'Bank-level security for your peace of mind',
-            icon: 'LockClosedIcon',
-            color: 'orange',
-          },
+          { title: 'Fast Approval', description: 'Get approved within 24 hours with our automated system', icon: 'RocketIcon', color: 'blue' },
+          { title: 'Flexible Repayment', description: 'Choose from multiple repayment options that suit your needs', icon: 'CalendarIcon', color: 'green' },
+          { title: 'Low Interest Rates', description: 'Competitive rates with transparent fee structure', icon: 'ShieldCheckIcon', color: 'purple' },
+          { title: 'Secure & Trusted', description: 'Bank-level security for your peace of mind', icon: 'LockClosedIcon', color: 'orange' },
         ],
         testimonials: [],
         faqs: [
-          {
-            question: 'What types of loans do you offer?',
-            answer: 'We offer personal loans, business loans, salary advances, and student loans.',
-          },
-          {
-            question: 'How long does it take to get approved?',
-            answer: 'Most applications are approved within 24 hours.',
-          },
-          {
-            question: 'What are the interest rates?',
-            answer: 'Interest rates vary by product and range from 5% to 15% per annum.',
-          },
+          { question: 'What types of loans do you offer?', answer: 'We offer personal loans, business loans, salary advances, and student loans.' },
+          { question: 'How long does it take to get approved?', answer: 'Most applications are approved within 24 hours.' },
+          { question: 'What are the interest rates?', answer: 'Interest rates vary by product and range from 5% to 15% per annum.' },
         ],
         loanProducts: [],
       };
