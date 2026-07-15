@@ -1,6 +1,5 @@
 // FILE: frontend/src/utils/axiosConfig.js
 
-
 import axios from 'axios';
 
 /**
@@ -17,8 +16,14 @@ import axios from 'axios';
  */
 
 // Determine the base URL
-// In development, use localhost. In production, use the deployed URL.
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// We sanitize the input to guarantee it ends with '/api' regardless of the environment
+let API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+// Remove any accidental trailing slashes, then safely append /api if missing
+API_URL = API_URL.trim().replace(/\/$/, '');
+if (!API_URL.endsWith('/api')) {
+  API_URL = `${API_URL}/api`;
+}
 
 // Create the Axios instance
 const axiosInstance = axios.create({
