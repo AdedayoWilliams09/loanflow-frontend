@@ -1,9 +1,10 @@
 // FILE: frontend/src/router.jsx
-// CREATED: New file
+
 
 import { createBrowserRouter, Link } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import Home from './pages/Home';
+import About from './pages/About';
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,11 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+
+      {
+        path: 'about',
+        element: <About />,
       },
       // More public routes will be added here
     ],

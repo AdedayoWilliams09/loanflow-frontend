@@ -1,17 +1,17 @@
 // FILE: frontend/src/store/store.js
 
-
-import { configureStore } from '@reduxjs/toolkit';
-import apiReducer from './apiSlice';
-import homeReducer from './homeSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import apiReducer from "./apiSlice";
+import homeReducer from "./homeSlice";
+import aboutReducer from "./aboutSlice";
 
 /**
  * Redux Store Configuration
- * 
+ *
  *  Child Explanation:
  * "This creates the central control room where we keep all the important
  * information for our app."
- * 
+ *
  *  Technical Explanation:
  * "configureStore sets up the Redux store with the reducers and middleware.
  * In development, it also enables Redux DevTools for debugging."
@@ -20,6 +20,7 @@ export const store = configureStore({
   reducer: {
     api: apiReducer,
     home: homeReducer,
+    about: aboutReducer,
     // Add more reducers here as the app grows
   },
   // Development tools
@@ -29,7 +30,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // Ignore these action types for serializability checks
-        ignoredActions: ['api/testConnection/pending'],
+        ignoredActions: ["api/testConnection/pending"],
       },
     }),
 });
