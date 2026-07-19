@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import apiReducer from "./apiSlice";
 import homeReducer from "./homeSlice";
 import aboutReducer from "./aboutSlice";
+import productsReducer from './productsSlice';
 
 /**
  * Redux Store Configuration
@@ -21,6 +22,7 @@ export const store = configureStore({
     api: apiReducer,
     home: homeReducer,
     about: aboutReducer,
+     products: productsReducer,
     // Add more reducers here as the app grows
   },
   // Development tools

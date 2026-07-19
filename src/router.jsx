@@ -5,6 +5,7 @@ import { createBrowserRouter, Link } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import Home from './pages/Home';
 import About from './pages/About';
+import LoanProducts from './pages/LoanProducts';
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: 'about',
         element: <About />,
+      },
+       {
+        path: 'loan-products',
+        element: <LoanProducts />,
       },
       // More public routes will be added here
     ],
