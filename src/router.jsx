@@ -6,6 +6,7 @@ import PublicLayout from './layouts/PublicLayout';
 import Home from './pages/Home';
 import About from './pages/About';
 import LoanProducts from './pages/LoanProducts';
+import FAQ from './pages/FAQ';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
        {
         path: 'loan-products',
         element: <LoanProducts />,
+      },
+       {
+        path: 'faq',
+        element: <FAQ />,
       },
       // More public routes will be added here
     ],
