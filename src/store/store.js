@@ -6,6 +6,7 @@ import homeReducer from "./homeSlice";
 import aboutReducer from "./aboutSlice";
 import productsReducer from './productsSlice';
 import faqReducer from './faqSlice';
+import contactReducer from './contactSlice';
 
 /**
  * Redux Store Configuration
@@ -25,6 +26,7 @@ export const store = configureStore({
     about: aboutReducer,
      products: productsReducer,
      faq: faqReducer,
+      contact: contactReducer,
     // Add more reducers here as the app grows
   },
   // Development tools
