@@ -7,6 +7,7 @@ import aboutReducer from "./aboutSlice";
 import productsReducer from './productsSlice';
 import faqReducer from './faqSlice';
 import contactReducer from './contactSlice';
+import authReducer from './authSlice';
 
 /**
  * Redux Store Configuration
@@ -27,6 +28,7 @@ export const store = configureStore({
      products: productsReducer,
      faq: faqReducer,
       contact: contactReducer,
+       auth: authReducer,
     // Add more reducers here as the app grows
   },
   // Development tools

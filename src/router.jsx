@@ -1,12 +1,25 @@
 // FILE: frontend/src/router.jsx
 
 import { createBrowserRouter, Link } from "react-router-dom";
+
+// Layouts
 import PublicLayout from "./layouts/PublicLayout";
+import AuthLayout from './layouts/AuthLayout';
+
+// Public Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
 import LoanProducts from "./pages/LoanProducts";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+
+// Auth Pages
+import Login from './pages/Login';
+import OAuthCallback from './pages/OAuthCallback';
+
+// Protected Components & Dashboard
+import ProtectedRoute from './components/common/ProtectedRoute'; // 👈 Added missing import
+import Dashboard from './pages/Dashboard';                     // 👈 Added missing import
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +30,6 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-
       {
         path: "about",
         element: <About />,
@@ -34,9 +46,37 @@ export const router = createBrowserRouter([
         path: "contact",
         element: <Contact />,
       },
-      // More public routes will be added here
     ],
   },
+
+  // Auth Routes
+  {
+    path: '/auth',
+    element: <AuthLayout />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'oauth-callback',
+        element: <OAuthCallback />,
+      },
+    ],
+  },
+
+  // Protected Routes
+  {
+    path: '/dashboard',
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+    ],
+  },
+
   // 404 handler
   {
     path: "*",
